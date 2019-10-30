@@ -15,9 +15,16 @@ public class VarastoTest {
     Varasto varasto;
     double vertailuTarkkuus = 0.0001;
 
+    Varasto varasto2;   //Jätetetään kivasti refaktoroinnille mahdollisuuksia...
+    Varasto varastoNeg;
+    Varasto varastoNeg2;
+
     @Before
     public void setUp() {
         varasto = new Varasto(10);
+        varasto2 = new Varasto(10, 20);
+        varastoNeg = new Varasto(-10);
+        varastoNeg2 = new Varasto(-10, 10);
     }
 
     @Test
@@ -63,6 +70,64 @@ public class VarastoTest {
 
         // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void uudellaVarastollaOikeaTilavuusJaSaldo() {
+        assertEquals(10, varasto2.getTilavuus(), vertailuTarkkuus);
+        assertEquals(10, varasto2.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void uudellaVarastollaOikeaTilavuttaPienempiSaldo() {
+        varasto2 = new Varasto(10, 8);
+        assertEquals(8, varasto2.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void nimiPalautetaanOikein() {
+        assertEquals("saldo = 0.0, vielä tilaa 10.0", varasto.toString());
+    }
+
+    @Test
+    public void ottamallaLiikaaSaadaanOikeaMaara() {
+        assertEquals(10, varasto2.otaVarastosta(20), vertailuTarkkuus);
+    }
+
+    @Test
+    public void liikaaLaittamallaYlimaarainenKatoaaOikein() {
+        varasto.lisaaVarastoon(50);
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void negatiivinenVarastoLuodaanOikein() {
+        assertEquals(0, varastoNeg.getTilavuus(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void negatiivisenMaaranLisays() {
+        varasto2.lisaaVarastoon(-10);
+        assertEquals(10, varasto2.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void negatiivisenMaaranOtto() {
+        varasto2.otaVarastosta(-10);
+        assertEquals(10, varasto2.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void negatiivinenVarastoAlkuSaldollaLuodaanOikein() {
+        assertEquals(0, varastoNeg2.getSaldo(), vertailuTarkkuus);
+        assertEquals(0, varastoNeg2.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void VarastoNegatiivisellaAlkuSaldollaLuodaanOikein() {
+        varastoNeg2 = new Varasto(10, -10);
+        assertEquals(0, varastoNeg2.getSaldo(), vertailuTarkkuus);
+        assertEquals(10, varastoNeg2.getTilavuus(), vertailuTarkkuus);
     }
 
 }
