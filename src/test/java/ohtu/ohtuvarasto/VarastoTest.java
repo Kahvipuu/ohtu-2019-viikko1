@@ -127,7 +127,7 @@ public class VarastoTest {
     public void VarastoNegatiivisellaAlkuSaldollaLuodaanOikein() {
         varastoNeg2 = new Varasto(10, -10);
         assertEquals(0, varastoNeg2.getSaldo(), vertailuTarkkuus);
-        assertEquals(10, varastoNeg2.getTilavuus(), vertailuTarkkuus);
+        assertEquals(0, varastoNeg2.getTilavuus(), vertailuTarkkuus); // (10, x, x)
     }
 
 }
