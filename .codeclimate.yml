@@ -2,7 +2,8 @@ plugins:
   checkstyle:
     enabled: true
     config:
-      file: "checkstyle.xml"
+      file: "C:\Aarne\Koulu\Ohjelmistotuotanto\ohtu-2019-viikko1\config\checkstyle\checkstyle.xml"
       
 <module name="Checker">
     <property name="severity" value="warning"/>
+    
