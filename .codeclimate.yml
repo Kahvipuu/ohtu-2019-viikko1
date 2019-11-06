@@ -2,8 +2,4 @@ plugins:
   checkstyle:
     enabled: true
     config:
-      file: "checkstyle.xml"
-      
-<module name="Checker">
-    <property name="severity" value="warning"/>
-    
+      file: "config/checkstyle/checkstyle.xml"    
